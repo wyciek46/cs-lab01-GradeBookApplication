@@ -10,10 +10,21 @@ namespace GradeBook.GradeBooks
         {
             Type = GradeBookType.Ranked;
         }
+         public override void CalculateStatistics()
+        {
+            if (Students.Count >= 5)
+            {
+                base.CalculateStatistics();
+            }
+            else
+            {
+                Console.WriteLine("Ranked grading requires at least 5 students.");
+            }
+        }
          public override char GetLetterGrade(double averageGrade)
         {
             if (Students.Count < 5)
-                throw new InvalidOperationException("Less than 5 Students");
+                throw new InvalidOperationException("Ranked grading requires at least 5 students.");
             
             var Hold = (int)Math.Ceiling(Students.Count * 0.2);
 
